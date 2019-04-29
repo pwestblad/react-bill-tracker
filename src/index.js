@@ -14,7 +14,7 @@ function App() {
   const [shouldShowAddBill, setShouldShowAddBill] = useState(false)
   const [categories, setCategories] = useState([])
   const [bills, setBills] = useState([])
-  const [activeCategory, setActiveCategory] = useState()
+  const [activeCategory, setActiveCategory] = useState('')
 
   const addCategory = category => {
     const updatedCategories = [...(categories || []), category]
@@ -71,7 +71,7 @@ function App() {
   const activeBills = () => {
     return bills
       .filter(bill =>
-        activeCategory ? bill.category === activeCategory : true
+        activeCategory !== '' ? (categories.indexOf(bill.category) === activeCategory) : true
       )
       .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1))
   }
